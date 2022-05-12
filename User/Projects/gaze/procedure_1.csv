@@ -1,0 +1,4 @@
+item,phasetype,max_time,text,shuffle_1,
+2,instruct,user,start test,off,
+2 to 4,instruct,user,{{cue}},trials,
+2,instruct,user,end,off,
