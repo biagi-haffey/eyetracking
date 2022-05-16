@@ -1536,12 +1536,17 @@ function stimuliStart() {
  
   document.body.style.cursor = 'none';
   stimuli_set = tStimuli.stimuli.shift();
- 
+  console.log("stimuli_set");
+  console.log(stimuli_set);
   stimuli_src_loaded = 0;
 
  
   [audio_set, image_set, video_set, text_set] = Array(4).fill([]);
   var these_elements = stimuli_set.elements.split(",");
+  
+  console.log("these_elements");
+  console.log(these_elements);
+  
   these_elements.forEach(function(this_element){
     var element_json = JSON.parse(stimuli_set[this_element]);
    
@@ -1587,7 +1592,7 @@ function stimuliStart() {
         $("#" + this_element).on("load",function(){
          
           stimuli_src_loaded = stimuli_src_loaded + 1;
-          if(these_elements.length == stimuli_src_length){
+          if(these_elements.length == stimuli_src_loaded){
             stimuli_loaded();
           }
         });

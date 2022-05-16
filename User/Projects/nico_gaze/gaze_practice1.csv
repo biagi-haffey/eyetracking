@@ -1,0 +1,38 @@
+trial,video_1,audio_1,text_1,keys_1,video_1.src,audio_1.src,elements,image_1,image_1.src,
+1,"{
+  ""type"": ""video"",
+  ""height"": 590,
+  ""width"": 885,
+  ""onset"": 0,
+  ""duration"": ""end"",
+  ""x"" : 0,
+  ""y"" : 0
+}","{
+  ""type"": ""audio"",
+  ""onset"": 0,
+  ""duration"": ""end""
+}","{
+  ""type"": ""text"",
+  ""text"": ""<h5>Please only use your free hand to select the emotions as follows:</h5><h5>U = Angry | I = Fear | O = Happy | P = Neutral</h5>"",
+  ""onset"": ""video_1.ended"",
+  ""x"": 0,
+  ""y"": 0,
+  ""duration"": ""keys_1.response"",
+  ""width"": ""500px""
+}","{
+  ""type"": ""keys"",
+  ""onset"": ""video_1.ended"",
+  ""keys"": ""u|i|o|p"",
+  ""duration"": 2000,
+  ""end_trial"": ""yes"",
+  ""answers"":""angry|fear|happy|neutral""
+}",../User/Stimuli/V_M21_A_Sp_D_N1.mp4,../User/Stimuli/A_M21_A_Sp_D_-5.wav,"text_1,keys_1,image_1","{
+  ""type"": ""image"",
+  ""height"": 590,
+  ""width"": 885,
+  ""onset"": 0,
+  ""duration"": ""end"",
+  ""x"" : 0,
+  ""y"" : 0
+}",../User/Stimuli/cong_left.png,
+,,,,,,,,,,
