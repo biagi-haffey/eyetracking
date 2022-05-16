@@ -32,7 +32,7 @@ Now we will start a short practice (there is no calibration dot for practice).
 <br>
 </span>
 <button onclick=""Phase.submit()"">Proceed</button>",,1,text,,,,,,,,,,
-0,,user,"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.",off,1,webgazer_3,13,yes,stimuli,gaze_practice1.csv,1,1100px,400px,off,image_1,
+0,,user,"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.",off,1,webgazer_3,13,no,stimuli,gaze_practice1.csv,1,1100px,400px,off,image_1,
 0,,user,"<style><br>
 #instructions{<br>
   margin:auto;<br>

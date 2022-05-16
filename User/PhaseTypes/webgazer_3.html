@@ -1357,6 +1357,9 @@ function check_end_trial(element_json){
   }
 }
 
+var CORRECT;
+var ANSWER_ELEMENT;
+
 function stimuli_loaded(){
   stimuli_no++;
  
@@ -1398,6 +1401,9 @@ function stimuli_loaded(){
   */
  
   var these_elements = stimuli_set.elements.split(",");
+ 
+  CORRECT =  stimuli_set.correct;
+  ANSWER_ELEMENT = stimuli_set.answer_element;
  
  
   these_elements.forEach(function(this_element){
@@ -1452,6 +1458,9 @@ function stimuli_loaded(){
         if(element_json.type == "keys"){
           $(window).bind('keypress', function(event) {
             keyboard_response(element_json, event, baseline_time, this_element);
+            
+            
+            
             /*
             if(element_json.keys.indexOf(String.fromCharCode(event.charCode)) !== -1){
               $("#" + this_element + "_value_" + trial_no).val(event.which);
@@ -1526,6 +1535,11 @@ function keyboard_response(element_json, event, baseline_time, this_element){
     $("#" + this_element + "_answer_"  + trial_no).val(key_answer);
     $("#" + this_element + "_value_rt_"  + trial_no).val((new Date()).getTime() - baseline_time);
     check_end_trial(element_json);
+    
+    if(key_response == CORRECT){
+      $("#" + ANSWER_ELEMENT).html("correct");
+    }
+    
   }
 }
 

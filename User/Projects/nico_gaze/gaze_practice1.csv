@@ -1,26 +1,74 @@
-trial,text_1,keys_1,elements,image_1,image_1.src,
+trial,text_1,keys_1,elements,image_1,image_1.src,correct,answer_element,
 1,"{
   ""type"": ""text"",
-  ""text"": ""<h5>Please only use your free hand to select the emotions as follows:</h5><h5>U = Angry | I = Fear | O = Happy | P = Neutral</h5>"",
-  ""onset"": ""video_1.ended"",
+  ""text"": ""<div style='text-align: center;'>Incorrect</div>"",
+  ""onset"": 800,
   ""x"": 0,
   ""y"": 0,
-  ""duration"": ""keys_1.response"",
+  ""duration"": 1000,
   ""width"": ""500px""
 }","{
   ""type"": ""keys"",
-  ""onset"": ""video_1.ended"",
-  ""keys"": ""u|i|o|p"",
-  ""duration"": 2000,
-  ""end_trial"": ""yes"",
-  ""answers"":""angry|fear|happy|neutral""
-}","keys_1,image_1","{
+  ""onset"": 0,
+  ""keys"": ""z|m"",
+  ""duration"": 800,
+  ""end_trial"": ""no"",
+  ""answers"":""left|right""
+}","keys_1,image_1,text_1","{
   ""type"": ""image"",
   ""height"": 590,
   ""width"": 885,
   ""onset"": 0,
-  ""duration"": 5000,
+  ""duration"": 800,
   ""x"" : 0,
   ""y"" : 0
-}",../User/Stimuli/cong_left.png,
-,,,,,,
+}",../User/Stimuli/cong_left.png,z,text_1,
+2,"{
+  ""type"": ""text"",
+  ""text"": ""<div style='text-align: center;'>Incorrect</div>"",
+  ""onset"": 800,
+  ""x"": 0,
+  ""y"": 0,
+  ""duration"": 1000,
+  ""width"": ""500px""
+}","{
+  ""type"": ""keys"",
+  ""onset"": 0,
+  ""keys"": ""z|m"",
+  ""duration"": 800,
+  ""end_trial"": ""no"",
+  ""answers"":""left|right""
+}","keys_1,image_1,text_1","{
+  ""type"": ""image"",
+  ""height"": 590,
+  ""width"": 885,
+  ""onset"": 0,
+  ""duration"": 800,
+  ""x"" : 0,
+  ""y"" : 0
+}",../User/Stimuli/cong_left.png,m,text_1,
+3,"{
+  ""type"": ""text"",
+  ""text"": ""<div style='text-align: center;'>Incorrect</div>"",
+  ""onset"": 800,
+  ""x"": 0,
+  ""y"": 0,
+  ""duration"": 1000,
+  ""width"": ""500px""
+}","{
+  ""type"": ""keys"",
+  ""onset"": 0,
+  ""keys"": ""z|m"",
+  ""duration"": 800,
+  ""end_trial"": ""no"",
+  ""answers"":""left|right""
+}","keys_1,image_1,text_1","{
+  ""type"": ""image"",
+  ""height"": 590,
+  ""width"": 885,
+  ""onset"": 0,
+  ""duration"": 800,
+  ""x"" : 0,
+  ""y"" : 0
+}",../User/Stimuli/cong_left.png,z,text_1,
+,,,,,,,,
