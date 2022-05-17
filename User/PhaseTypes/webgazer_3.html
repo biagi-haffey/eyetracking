@@ -1516,6 +1516,7 @@ function stimuli_loaded(){
     } else {
       setTimeout(function(){
         $("#" + this_element).hide();
+        check_end_trial(element_json);
         status = status.replace("-" + this_element,"");
         active_videos[this_element].stopListen();
         //check_end_trial(element_json);
@@ -1537,7 +1538,9 @@ function keyboard_response(element_json, event, baseline_time, this_element){
     check_end_trial(element_json);
     
     if(key_response == CORRECT){
-      $("#" + ANSWER_ELEMENT).html("correct");
+      $("#" + ANSWER_ELEMENT).html("<h1 style='text-align: center;' class='text-success'>Correct</h1>");
+    } else {
+      $("#" + ANSWER_ELEMENT).html("<h1 style='text-align: center;' class='text-danger'>Incorrect</h1>");
     }
     
   }
