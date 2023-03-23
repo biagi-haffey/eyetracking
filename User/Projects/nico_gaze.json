@@ -2,7 +2,7 @@
   "all_procs": {
     "procedure_1.csv": "item,survey,max_time,text,shuffle_1,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,weight,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,text,,,,,,,,,,,\r\n0,urop_demographics.csv,user,,,survey,,,,,,,,,,0,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks (about every 13 min), please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,text,,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_practice.csv,4,1100px,400px,,,,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the actual task.</div>\r\nPlease do not move your body or head.</div>\r\n</div>\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,,",
     "procedure_1_reversed.csv": "item,survey,name,max_time,text,shuffle_1,weight,freeview_image_file,phasetype,calibration_skip,calibrations,design_type,calibration_skip*,image_height,image_width,save_script,stim_duration,trials,left_position,right_position,min_width,min_height,skip_instruct,backup_script_location,left_side,\r\n0,,DRINKERS ONLY,,\"This study asks questions about your alcoholic drinking habits. Please ONLY press \"\"proceed\"\" if you drink alcohol\",,,,instruct,,,,,,,,,,,,,,,,,\r\n0,info_jf1.csv,information,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,consent_jf1.csv,consent,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,,instruct,user,\"<span style='font-size:20px'>Thank you for participating - you are about to start an eye-tracking task. <br><br>\r\n In this task we will ask you to look at some dots to train the camera to know where your eyes are looking. <br><br>\r\n After this we will present you with pairs of images. You can look wherever you like on the screen.\r\n </span>\",off,1,,instruct,,,,,,,,,,,,,,,,,\r\n0,,webgazer,user,\"Please look at the cross.<br />A pair of images will follow. You are free <br />to look at either image.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,gaze_pairs_a_sn_r1.csv,webgazer_3,no,13,freeview,no,300px,400px,,5000,40,-300px,300px,1100px,400px,off,,image_1,\r\n0,,instruct,user,Please take a break before starting the second half of the eyetracking task.,off,1,,instruct,,,,,,,,,,,,,,,,,\r\n0,,webgazer,user,\"Please look at the cross.<br />A pair of images will follow. You are free <br />to look at either image.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,gaze_pairs_a_sn_r2.csv,webgazer_3,no,13,freeview,no,300px,400px,,5000,40,-300px,300px,1100px,400px,off,,image_1,\r\n0,modified_childhood_experiences.csv,childhood_experiences,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,barratt-impulsiveness.csv,impulsiveness,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,pathological_narcissism.csv,narcissism,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,audit.csv,alcohol,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,social_media_disorder.csv,social_networking,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,phq_9_adjusted.csv,depression,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,erq.csv,emotions,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,debrief_jf1.csv,debrief,user,,off,1,,survey,,,,,,,,,,,,,,,,,\r\n0,sources_of_support_jf1.csv,support,user,,off,1,,survey,,,,,,,,,,,,,,,,,",
-    "procedure_actual_list1.csv": "item,survey,max_time,text,shuffle_1,weight,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,0,text,,,,,,,,,,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks, please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n<br>\r\nNow we will start a short practice (there is no calibration dot for practice). \r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,0,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A series of arrows will follow, but you only need to respond to the middle arrow. Press the \"\"Z\"\" key if the middle arrow is pointing left, and the \"\"M\"\" key if it is pointing right.\",off,1,webgazer_3,13,yes,stimuli,gaze_practice1.csv,4,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the task.<br>\r\nPlease do not move your body or head.</div><br>\r\n</div><br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,webgazer_3,13,yes,stimuli,gaze_actual_list1a.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">Please take a break, we have one session left.</div>\r\n\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,webgazer_3,13,no,stimuli,gaze_actual_list1b.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of first part, please take a break.<br>\r\nIn the second part we will ask you some questions.</div><br>\r\n<br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,urop_demographics.csv,user,,off,1,survey,,,,,,,,,,\r\n0,autism_quotient.csv,user,,off,1,survey,,,,,,,,,,\r\n0,urop_panas.csv,user,,off,1,survey,,,,,,,,,,",
+    "procedure_actual_list1.csv": "item,survey,max_time,text,shuffle_1,weight,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,0,text,,,,,,,,,,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks, please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n<br>\r\nNow we will start a short practice (there is no calibration dot for practice). \r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,0,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A series of arrows will follow, but you only need to respond to the middle arrow. Press the \"\"Z\"\" key if the middle arrow is pointing left, and the \"\"M\"\" key if it is pointing right.\",off,1,webgazer_3,13,no,stimuli,gaze_practice1.csv,4,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the task.<br>\r\nPlease do not move your body or head.</div><br>\r\n</div><br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,webgazer_3,13,no,stimuli,gaze_actual_list1a.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">Please take a break, we have one session left.</div>\r\n\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,1,webgazer_3,13,no,stimuli,gaze_actual_list1b.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of first part, please take a break.<br>\r\nIn the second part we will ask you some questions.</div><br>\r\n<br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,1,text,,,,,,,,,,\r\n0,urop_demographics.csv,user,,off,1,survey,,,,,,,,,,\r\n0,autism_quotient.csv,user,,off,1,survey,,,,,,,,,,\r\n0,urop_panas.csv,user,,off,1,survey,,,,,,,,,,",
     "procedure_actual_list2.csv": "item,survey,max_time,text,shuffle_1,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,text,,,,,,,,,,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks, please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n<br>\r\nNow we will start a short practice (there is no calibration dot for practice). \r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,yes,stimuli,gaze_practice2.csv,4,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the task.<br>\r\nPlease do not move your body or head.</div><br>\r\n</div><br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list2a.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">Please take a break, we have one session left.</div>\r\n\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list2b.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of first part, please take a break.<br>\r\nIn the second part we will ask you some questions.</div><br>\r\n<br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,urop_demographics.csv,user,,off,survey,,,,,,,,,,\r\n0,autism_quotient.csv,user,,off,survey,,,,,,,,,,\r\n0,urop_panas.csv,user,,off,survey,,,,,,,,,,",
     "procedure_actual_list3.csv": "item,survey,max_time,text,shuffle_1,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,text,,,,,,,,,,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks, please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n<br>\r\nNow we will start a short practice (there is no calibration dot for practice). \r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,yes,stimuli,gaze_practice3.csv,4,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the task.<br>\r\nPlease do not move your body or head.</div><br>\r\n</div><br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list3a.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">Please take a break, we have one session left.</div>\r\n\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list3b.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of first part, please take a break.<br>\r\nIn the second part we will ask you some questions.</div><br>\r\n<br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,urop_demographics.csv,user,,off,survey,,,,,,,,,,\r\n0,autism_quotient.csv,user,,off,survey,,,,,,,,,,\r\n0,urop_panas.csv,user,,off,survey,,,,,,,,,,",
     "procedure_actual_list4.csv": "item,survey,max_time,text,shuffle_1,phasetype,calibrations,calibration_skip,design_type,image_file,trials,min_width,min_height,skip_instruct,left_side,\r\n0,,user,\"<h2>Debrief </h2>\r\n<span style='font-size:23'>Thank you for taking part in the CAASD lab eye-tracking emotion study. Your participation is extremely valued, and will help us to better understand how we process emotional voices and facial expressions.<br>\r\nThis study consists of two parts. In the first part, you will hear  emotional voices and see short videos, you will have to make the judgement of what emotion you perceive. We will use the webcam to track your attention, your video will not be saved, the location where you look will be saved anonymously. In the second part, we will ask you for some basic demographic details and to rate some statements that best describe you and how you feel.</span>\r\n<br><br>\r\n<br>\r\n<br>\r\nThis study, conducted by Dr Fang Liu, Dr Chen Zhao, Dr Anthony Haffey, and Kiera Stevens. School of Psychology & Clinical Language Sciences, University of Reading, has been reviewed by the University Research Ethics Committee and has been given a favourable ethical opinion for conduct. <br>\r\nIf you have any questions or wish to withdraw from the study, please contact us at: caasd@reading.ac.uk\r\n\r\n<a href=\"\"../User/Stimuli/SONA_ParticipantInfo.pdf\"\">Please download and read this information </a>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\r\n\",,text,,,,,,,,,,\r\n0,,user,\"<span style='font-size:20'>Please choose a quiet and well-lit place to take part in the study so you can concentrate, as the quality of the data is very important to us. <br /><br>\r\n<span style='font-size:20'>In this part, you will hear emotional voices and see facial expressions. You will have to make judgements of what emotion you perceive, as quickly and accurately as possible, by pressing the key. We will go through some practice trials to familarise the procedure.\r\n<br>\r\n<br>After the calibration, please keep your head and body as still as possible, this is to ensure we have captured your attention accurately. When there is a cross on the screen please look at the centre of the cross.<br>\r\n<br>\r\nPlease use your headphones once you are ready to start. Here is a sound example, please adjust the volume to a comfortable level and <b>keep the same volume throughout the study</b>.<br> Note: this sound has added noise, so you should expect to hear a static-like sound. <br /><br></span>\r\n<audio controls>\r\n  <source src=\"\"../User/Stimuli/A_W14_N_Sp_D_-5.wav\"\" type=\"\"audio/wav\"\">\r\n  Your browser does not support the audio tag.\r\n</audio><br>\r\n<br>\r\n\r\n<span style='font-size:20'>Please note that you will be given opportunities to have breaks, please only take breaks when the instruction shows on the screen, as any interruption of the study will require calibration for attention tracking.\r\n<br>\r\n<br>\r\nNow we will start a short practice (there is no calibration dot for practice). \r\n\r\n<br>\r\n</span>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,yes,stimuli,gaze_practice4.csv,4,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of the practice, we will now proceed to the task.<br>\r\nPlease do not move your body or head.</div><br>\r\n</div><br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list4a.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style>\r\n#instructions{\r\n  margin:auto;\r\n  width:500px;\r\n  padding:50px;\r\n  height:600px;\r\n  text-align: center;    \r\n}\r\n</style>\r\n\r\n<div id=\"\"instructions\"\">Please take a break, we have one session left.</div>\r\n\r\n\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,,user,\"Please look at the cross.<br />A video will follow.<br /><br />Do not move your head, <br />only use your eyes.\",off,webgazer_3,13,no,stimuli,gaze_actual_list4b.csv,80,1100px,400px,off,image_1,\r\n0,,user,\"<style><br>\r\n#instructions{<br>\r\n  margin:auto;<br>\r\n  width:500px;<br>\r\n  padding:50px;<br>\r\n  height:600px;<br>\r\n  text-align: center;    <br>\r\n}<br>\r\n</style><br>\r\n<br>\r\n<div id=\"\"instructions\"\">This is the end of first part, please take a break.<br>\r\nIn the second part we will ask you some questions.</div><br>\r\n<br>\r\n<br>\r\n<button onclick=\"\"Phase.submit()\"\">Proceed</button>\",,text,,,,,,,,,,\r\n0,urop_demographics.csv,user,,off,survey,,,,,,,,,,\r\n0,autism_quotient.csv,user,,off,survey,,,,,,,,,,\r\n0,urop_panas.csv,user,,off,survey,,,,,,,,,,"
@@ -27,82 +27,207 @@
   },
   "public_key": "MiWanD+agOxPh6o5QESNYLqaxoP2ujlQtIh0wCDHkRM=",
   "surveys": {
-    "borcsok_ethics.csv": [
+    "urop_demographics.csv": [
       [
         "item_name",
         "text",
-        "Type",
-        "Answers",
-        "Values",
-        "Optional",
+        "type",
+        "answers",
+        "optional",
+        "values",
         "side_by_side",
+        "btn_width",
+        "other",
         "question_width",
-        null
+        ""
       ],
       [
-        "Instructions1",
-        "<h2>School of Psychology</h2>\r\n\r\n<h5>Earley Gate, <br>\r\nWhiteknights<br>\r\nPO Box 238, <br>\r\nReading <br>\r\nRG6 6AL, <br>\r\nUK</h5>\r\n\r\n<h6>phone\t+44 (0)118 378 8523</h6>\r\n<h6>fax\t+44 (0)118 378 6715</h6>\r\n<br>\r\n\r\n<h3>Title of Study: Investigating attentional biases to neutral and pleasant images: An eye-tracking study</h3>\r\n\r\n\r\n<h3>Information & Consent Sheet</h3>\r\n\r\n<h3>Researchers: </h3>\r\n<table>\r\n  <tr>\r\n  \r\n    <td>\r\n      <b>Supervisors:</b>\r\n    </td>\r\n    <td>\r\n      <b>Email:</b>\r\n    </td>\r\n    <td>\r\n      <b>Phone:</b>\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>\r\n      Dr Anthony Haffey      \r\n    </td>\r\n    <td>\r\n      Anthony.Haffey@reading.ac.uk\r\n    </td>\r\n    <td>\r\n      0118 378 8850\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>\r\n      Dr Lily Fitzgibbon\r\n    </td>\r\n    <td>\r\n      l.t.fitzgibbon@reading.ac.uk\r\n    </td>\r\n    <td>\r\n      0118 378 8850\r\n    </td>\r\n  </tr>\r\n</table>\r\n<br>\r\n<br>\r\n\t\t\r\n<table>\r\n  <tr>\r\n    <td>\r\n      <b>Experimenters</b>\r\n    </td>\r\n    <td>\r\n      <b>Email</b>\r\n    </td>\r\n  </tr>\r\n  <tr>\r\n    <td>\r\n      Rebecca Borcsok\r\n    </td>\r\n    <td>\r\n      r.borcsok@student.reading.ac.uk \r\n    </td>\r\n  </tr>\r\n</table>\r\n<br>\r\n\r\n<p>\r\nYou are being invited to take part in some research. Before you decide whether or not to participate, it is important for you to understand why the research is being conducted and what it will involve. Please read the following information carefully.  \r\n</p>\r\n\r\n\r\n<h4>What is the purpose of the research? </h4>\r\n<p>\r\nWe are conducting research exploring eye movements when viewing neutral or pleasant images. The purpose of the study is to determine if individual differences influence attentional behaviour. Your participation in this study will require one 30-minute session.  \r\n</p>\r\n\r\n<h4>Who is carrying out the research? </h4>\r\n<p>The data are being collected by Rebecca Borcsok, under the supervision of Dr Anthony Haffey and Dr Lily Fitzgibbon, in the School of Psychology and Clinical Language Sciences at University of Reading. The research has been approved by the School and University ethics committees. </p>\r\n\r\n<h4>What happens if I agree to take part? </h4>\r\n<p>If you agree to take part in this research, you will be asked to take part in a task where you will view matched pairs of images, whilst your eye movements are recorded. You will also be asked to complete a video-game style task, which records your decision-making. After the two tasks, you will also be asked to complete some questionnaires, including some that ask about your alcohol and gambling behaviours. At the end of the study, you will be debriefed on the tasks you have completed and given further information on the aims of the study. </p>\r\n\r\n<h4>Are there any risks associated with taking part?</h4> \r\n<p>One risk of taking part in this study is the issue of confidentiality. To ensure that information about your personal use of alcohol or gambling behaviour is known by to as few members of the research team as possible, this information will be held by Rebecca Borcsok only, until the study is complete. You will be identified by code only during the study, so you cannot be matched with information about alcohol use or gambling. After the study is complete, all identifying information will be removed, and only subject codes (and non-identifying information) would be matched to information about your alcohol use and gambling behaviour. </p>\r\n\r\n<h4>What will happen to the information I provide?</h4> \r\n<p>Your data will be kept confidential and securely stored, with only an anonymous number identifying it. Information linking that number to your name will be stored securely and separately from the data you provide us. All identifiable information collected for the project, such as the consent form, will be destroyed after a period of 60 months from the when the completion of the project has elapsed. </p>\r\n<p>An analysis of the information will form part of our report at the end of the study and may be presented to interested parties and published in scientific journals and related media.  Note that all information presented in any reports or publications will be anonymous and unidentifiable.</p>\r\n\r\n<h4>Is participation voluntary and what if I wish to later withdraw? </h4>\r\n<p>Taking part in this study is completely voluntary; you may withdraw at any time without having to give any reason. Please feel free to ask any questions that you may have about this study at any point.</p>\r\n\r\n<h4>What if I have other questions? </h4>\r\n<p>If you have further questions about this study, please do not hesitate to contact the student experimenter or supervisors listed above.</p>",
-        "Instruct",
+        "Gender",
+        "Gender",
+        "radio",
+        "Male|Female|Other",
+        "No",
+        "",
+        "yes",
+        "100px",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Age",
+        "Age",
+        "number",
+        "",
+        "No",
         "",
         "",
         "",
         "",
-        null,
-        null
+        "75%",
+        ""
       ],
       [
-        "info_questions",
-        "I confirm that I have read the information sheet for this study. I have had the opportunity to consider the information, ask questions and have had these answered satisfactorily.",
-        "likert",
-        "Agree",
-        "1",
+        "Education",
+        "Education (which level are you currently in, or is the highest you've completed)",
+        "dropdown",
+        "Some high school| High school graduate| Some college, no degree| Associate's degree| Bachelor's degree|Graduate degree (Master's, Doctorate, etc.)",
         "No",
-        "yes",
-        "80%"
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
       ],
       [
-        "info_confidential",
-        "I understand that all personal information will remain confidential to the Investigator and arrangements for the storage and eventual disposal of any identifiable material have been made clear to me.",
-        "likert",
-        "Agree",
-        "1",
+        "Country",
+        "What is your country of residence?",
+        "text",
+        "",
         "No",
-        "yes",
-        "80%",
-        null
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
       ],
       [
-        "info_voluntary",
-        "I understand that participation in this study is voluntary and that I can withdraw at any time without having to give an explanation.",
-        "likert",
-        "Agree",
-        "1",
+        "English_Fluency",
+        "Do you speak English fluently?",
+        "radio",
+        "Yes|No",
         "No",
+        "",
         "yes",
-        "80%",
-        null
+        "200px",
+        "",
+        "75%",
+        ""
       ],
       [
-        "Info_Accept",
-        "I am happy to proceed with my participation.",
-        "likert",
-        "Agree",
-        "1",
+        "English_Age",
+        "At what age did you start learning English? (write \"0\" if from birth)",
+        "number",
+        "",
         "No",
-        "yes",
-        "80%",
-        null
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
       ],
       [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        "Native_language",
+        "What is your native language(s)? (If 'other' please specify)",
+        "checkbox",
+        "British English",
+        "No",
+        "",
+        "",
+        "",
+        "yes",
+        "75%",
+        ""
+      ],
+      [
+        "Age_started_language",
+        "At what age did you start using this language most? (write \"0\" if from birth)",
+        "number",
+        "",
+        "No",
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Tone_languages",
+        "Can you understand or speak any tone languages (e.g. Mandarin, Thai)? If 'yes' please specify",
+        "checkbox",
+        "No|Yes",
+        "No",
+        "",
+        "",
+        "",
+        "yes",
+        "75%",
+        ""
+      ],
+      [
+        "Handedness",
+        "What is your preferred hand?",
+        "radio",
+        "Left|Right|Both",
+        "No",
+        "",
+        "yes",
+        "100px",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Clinical_diagnosis",
+        "Do you have a clinical diagnosis of any of the following conditions? (Please select any that apply)",
+        "checkbox",
+        "Autism spectrum disorder (ASD)|Dyslexia|Attention-deficit disorder (ADD)/ Attention deficit hyperactivity disorder (ADHD)|Depression|Anxiety|Another mental health condition|A chronic physical health condition|None of the above",
+        "No",
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Hearing_disorders",
+        "As far as you know, do you have/have you had any hearing disorders (e.g. hearing loss)?",
+        "dropdown",
+        "Yes|No",
+        "No",
+        "",
+        "yes",
+        "200px",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Absolute_pitch",
+        "Do you have absolute pitch (or perfect pitch; the ability to identify a musical note without a reference tone)?",
+        "radio",
+        "Yes|No",
+        "No",
+        "",
+        "yes",
+        "200px",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "Music_training",
+        "How many years of formal music training (on a musical instrument including voice) have you had? Please list your years of experience, e.g., piano, 10 years; voice, 2 years",
+        "text",
+        "",
+        "No",
+        "",
+        "",
+        "",
+        "",
+        "75%",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        ""
       ]
     ],
     "info_jf1.csv": [
@@ -1666,14 +1791,14 @@
         ""
       ]
     ],
-    "phq9.csv": [
+    "phq_9_adjusted.csv": [
       [
         "item_name",
         "text",
         "type",
         "answers",
         "values",
-        "score: mce_total",
+        "score:phq9",
         "optional",
         "btn_width",
         ""
@@ -1695,7 +1820,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1706,7 +1831,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1717,7 +1842,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1728,7 +1853,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1739,7 +1864,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1750,7 +1875,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1761,7 +1886,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1772,141 +1897,7 @@
         "likert",
         " Not at all|Several days|More than half the days|Nearly every day",
         "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_9",
-        "9. Thoughts that you would be better off dead, or of hurting yourself in some way?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    ],
-    "emotion_regulation.csv": [
-      [
-        "item_name",
-        "text",
-        "type",
-        "answers",
-        "values",
-        "score: mce_total",
-        "optional",
-        "btn_width",
-        ""
-      ],
-      [
-        "Instructions1",
-        "<span style='color:#006699'><span style='font-size:20px'><b> INSTRUCTIONS </b> <br> We would like to ask you  some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your <b><u> emotional experience </b> </u></span></span>",
-        "instruct",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "PHQ9_1",
-        "1. Little interest or pleasure in doing things?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_2",
-        "2. Feeling down, depressed, or hopeless?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_3",
-        "3. Trouble falling or staying asleep, or sleeping too much?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_4",
-        "4. Feeling tired or having little energy?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_5",
-        "5. Poor appetite or overeating?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_6",
-        "6. Feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_7",
-        "7. Trouble concentrating on things, such as reading the newspaper or watching the television?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_8",
-        "8. Moving or speaking so slowly that other people could have noticed? <br> Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "0|1|2|3",
+        "1",
         "No",
         "100px",
         ""
@@ -1919,58 +1910,6 @@
         "",
         "",
         "",
-        "",
-        null
-      ]
-    ],
-    "debrief_jf1.csv": [
-      [
-        "item_name",
-        "text",
-        "type",
-        "answers",
-        "values",
-        "optional",
-        "side_by_side",
-        ""
-      ],
-      [
-        "Instructions1",
-        "<div align=\"right\">School of Psychology and Clinical Language Sciences<br>\nWhiteknights<br>\nReading RG6 6AL</div>\n<h2>University of Reading</h2><br>\n<h2>Title of Study: Investigating attentional biases to neutral and pleasant images 2: An eye-tracking study</h2><br>\n<h2>Debrief </h2>\n\n<br>\n<table class=\"table\">\n  <tr>\n    <td><b>Investigator(s):</b></td>\n    <td><b>Email:</b></td>\n    <td><b>Telephone:</b></td>\n  </tr>\n    <tr>\n    <td>Anthony Haffey</td>\n    <td>anthony.haffey@reading.ac.uk</td>\n    <td>-01183788523-</td>\n  </tr>\n  <tr>\n    <td>Chen Zhao</td>\n    <td>c.zhao5@reading.ac.uk</td>\n    <td></td>\n  </tr>\n<tr>\n    <td>Nicholas Hedger</td>\n    <td>n.hedger@reading.ac.uk</td>\n    <td></td>\n  </tr>\n  <tr>\n    <td><b>Researcher(s):</b></td>\n  </tr>\n  <tr>\n    <td>Joe Forrest</td>\n    <td>j.forrest@reading.ac.uk</td>\n    <td></td>\n  </tr>\n</table>\n\nThank you for participating in our study. <br>\nWe were interested in examining how self-reported social networking, alcohol addiction and other personality traits predict which images you looked longer at.\nWe are interested in whether you looked longer at images associated with addictive stimuli, i.e. alcohol or social networking, compared to visually similar images.<br><br>\nFollowing this debrief, we would like to remind you that you are free to withdraw your data at any time without needing to provide a reason. \nIf you feel any adverse effects from the study in general, you can contact the principle supervisor Dr Anthony Haffey or the postgraduate researcher, \nJoseph Forrest, via the contact information provided on this debrief sheet.<br><br>\nIf you still have concerns, sources of support will also be provided on the next page.",
-        "instruct",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "",
-        ""
-      ]
-    ],
-    "sources_of_support_jf1.csv": [
-      [
-        "item_name",
-        "text",
-        "type",
-        "answers",
-        "values",
-        "optional",
-        "side_by_side",
-        ""
-      ],
-      [
-        "Instructions1",
-        "<div align=\"right\">School of Psychology and Clinical Language Sciences<br>\nWhiteknights<br>\nReading RG6 6AL</div>\n<h2>University of Reading</h2><br>\n<h2>Title of Study: Investigating attentional biases to neutral and pleasant images 2: An eye-tracking study</h2><br>\n<h2>Debrief </h2>\n\n<br>\n<table class=\"table\">\n  <tr>\n    <td><b>Investigator(s):</b></td>\n    <td><b>Email:</b></td>\n    <td><b>Telephone:</b></td>\n  </tr>\n    <tr>\n    <td>Anthony Haffey</td>\n    <td>anthony.haffey@reading.ac.uk</td>\n    <td>-01183788523-</td>\n  </tr>\n  <tr>\n    <td>Chen Zhao</td>\n    <td>c.zhao5@reading.ac.uk</td>\n    <td></td>\n  </tr>\n<tr>\n    <td>Nicholas Hedger</td>\n    <td>n.hedger@reading.ac.uk</td>\n    <td></td>\n  </tr>\n  <tr>\n    <td><b>Researcher(s):</b></td>\n  </tr>\n  <tr>\n    <td>Joe Forrest</td>\n    <td>j.forrest@reading.ac.uk</td>\n    <td></td>\n  </tr>\n</table>\nIf you feel affected by the issues raised in the study, and your concerns about these issues remain after you have completed the session, you can contact the researchers listed above. However, there are other external sources of support that should be able to address your concerns, as listed:\n<br><br>\n<ul style=\"list-style-type:disc\">\n         <li>NHS online: www.NHS.uk if you are concerned about your alcohol and/or social networking behaviours \n</li>\n         <li>Mind: www.mind.org.uk if you wish to seek mental health support on alcohol and/or social networking behaviour\n</li>\n         <li>University of Reding Counselling Services: http://www.reading.ac.uk/internal/staffportal/SASstaff/SASwellbeing  provides 24/7 online support for students. You can also use this website to book an appointment to meet with a counsellor, if you prefer. \n</li>\n<li>Your General Practitioner (GP): https://www.nhs.uk/using-the-nhs/nhs-services/gps/gp-online-services  you can book an appointment online to meet with your GP, if you wish to seek help around alcohol and/or gambling behaviour. \n</li>\n      </ul>",
-        "instruct",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
         "",
         ""
       ]
@@ -2146,328 +2085,54 @@
         ""
       ]
     ],
-    "phq_9_adjusted.csv": [
+    "debrief_jf1.csv": [
       [
         "item_name",
         "text",
         "type",
         "answers",
         "values",
-        "score:phq9",
         "optional",
-        "btn_width",
+        "side_by_side",
         ""
       ],
       [
         "Instructions1",
-        "<span style='color:#006699'><span style='font-size:20px'><b> INSTRUCTIONS </b> <br> Please answer the following questions </br> Over the last two weeks, how often have you been bothered by any of the following problems? </span></span>",
+        "<div align=\"right\">School of Psychology and Clinical Language Sciences<br>\nWhiteknights<br>\nReading RG6 6AL</div>\n<h2>University of Reading</h2><br>\n<h2>Title of Study: Investigating attentional biases to neutral and pleasant images 2: An eye-tracking study</h2><br>\n<h2>Debrief </h2>\n\n<br>\n<table class=\"table\">\n  <tr>\n    <td><b>Investigator(s):</b></td>\n    <td><b>Email:</b></td>\n    <td><b>Telephone:</b></td>\n  </tr>\n    <tr>\n    <td>Anthony Haffey</td>\n    <td>anthony.haffey@reading.ac.uk</td>\n    <td>-01183788523-</td>\n  </tr>\n  <tr>\n    <td>Chen Zhao</td>\n    <td>c.zhao5@reading.ac.uk</td>\n    <td></td>\n  </tr>\n<tr>\n    <td>Nicholas Hedger</td>\n    <td>n.hedger@reading.ac.uk</td>\n    <td></td>\n  </tr>\n  <tr>\n    <td><b>Researcher(s):</b></td>\n  </tr>\n  <tr>\n    <td>Joe Forrest</td>\n    <td>j.forrest@reading.ac.uk</td>\n    <td></td>\n  </tr>\n</table>\n\nThank you for participating in our study. <br>\nWe were interested in examining how self-reported social networking, alcohol addiction and other personality traits predict which images you looked longer at.\nWe are interested in whether you looked longer at images associated with addictive stimuli, i.e. alcohol or social networking, compared to visually similar images.<br><br>\nFollowing this debrief, we would like to remind you that you are free to withdraw your data at any time without needing to provide a reason. \nIf you feel any adverse effects from the study in general, you can contact the principle supervisor Dr Anthony Haffey or the postgraduate researcher, \nJoseph Forrest, via the contact information provided on this debrief sheet.<br><br>\nIf you still have concerns, sources of support will also be provided on the next page.",
         "instruct",
         "",
         "",
         "",
         "",
-        "",
         ""
       ],
       [
-        "PHQ9_1",
-        "1. Little interest or pleasure in doing things?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_2",
-        "2. Feeling down, depressed, or hopeless?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_3",
-        "3. Trouble falling or staying asleep, or sleeping too much?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_4",
-        "4. Feeling tired or having little energy?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_5",
-        "5. Poor appetite or overeating?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_6",
-        "6. Feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_7",
-        "7. Trouble concentrating on things, such as reading the newspaper or watching the television?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "PHQ9_8",
-        "8. Moving or speaking so slowly that other people could have noticed? <br> Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
-        "likert",
-        " Not at all|Several days|More than half the days|Nearly every day",
-        "0|1|2|3",
-        "1",
-        "No",
-        "100px",
-        ""
-      ],
-      [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
         "",
         ""
       ]
     ],
-    "urop_demographics.csv": [
+    "sources_of_support_jf1.csv": [
       [
         "item_name",
         "text",
         "type",
         "answers",
-        "optional",
         "values",
+        "optional",
         "side_by_side",
-        "btn_width",
-        "other",
-        "question_width",
         ""
       ],
       [
-        "Gender",
-        "Gender",
-        "radio",
-        "Male|Female|Other",
-        "No",
+        "Instructions1",
+        "<div align=\"right\">School of Psychology and Clinical Language Sciences<br>\nWhiteknights<br>\nReading RG6 6AL</div>\n<h2>University of Reading</h2><br>\n<h2>Title of Study: Investigating attentional biases to neutral and pleasant images 2: An eye-tracking study</h2><br>\n<h2>Debrief </h2>\n\n<br>\n<table class=\"table\">\n  <tr>\n    <td><b>Investigator(s):</b></td>\n    <td><b>Email:</b></td>\n    <td><b>Telephone:</b></td>\n  </tr>\n    <tr>\n    <td>Anthony Haffey</td>\n    <td>anthony.haffey@reading.ac.uk</td>\n    <td>-01183788523-</td>\n  </tr>\n  <tr>\n    <td>Chen Zhao</td>\n    <td>c.zhao5@reading.ac.uk</td>\n    <td></td>\n  </tr>\n<tr>\n    <td>Nicholas Hedger</td>\n    <td>n.hedger@reading.ac.uk</td>\n    <td></td>\n  </tr>\n  <tr>\n    <td><b>Researcher(s):</b></td>\n  </tr>\n  <tr>\n    <td>Joe Forrest</td>\n    <td>j.forrest@reading.ac.uk</td>\n    <td></td>\n  </tr>\n</table>\nIf you feel affected by the issues raised in the study, and your concerns about these issues remain after you have completed the session, you can contact the researchers listed above. However, there are other external sources of support that should be able to address your concerns, as listed:\n<br><br>\n<ul style=\"list-style-type:disc\">\n         <li>NHS online: www.NHS.uk if you are concerned about your alcohol and/or social networking behaviours \n</li>\n         <li>Mind: www.mind.org.uk if you wish to seek mental health support on alcohol and/or social networking behaviour\n</li>\n         <li>University of Reding Counselling Services: http://www.reading.ac.uk/internal/staffportal/SASstaff/SASwellbeing  provides 24/7 online support for students. You can also use this website to book an appointment to meet with a counsellor, if you prefer. \n</li>\n<li>Your General Practitioner (GP): https://www.nhs.uk/using-the-nhs/nhs-services/gps/gp-online-services  you can book an appointment online to meet with your GP, if you wish to seek help around alcohol and/or gambling behaviour. \n</li>\n      </ul>",
+        "instruct",
         "",
-        "yes",
-        "100px",
         "",
-        "75%",
+        "",
+        "",
         ""
       ],
       [
-        "Age",
-        "Age",
-        "number",
-        "",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Education",
-        "Education (which level are you currently in, or is the highest you've completed)",
-        "dropdown",
-        "Some high school| High school graduate| Some college, no degree| Associate's degree| Bachelor's degree|Graduate degree (Master's, Doctorate, etc.)",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Country",
-        "What is your country of residence?",
-        "text",
-        "",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "English_Fluency",
-        "Do you speak English fluently?",
-        "radio",
-        "Yes|No",
-        "No",
-        "",
-        "yes",
-        "200px",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "English_Age",
-        "At what age did you start learning English? (write \"0\" if from birth)",
-        "number",
-        "",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Native_language",
-        "What is your native language(s)? (If 'other' please specify)",
-        "checkbox",
-        "British English",
-        "No",
-        "",
-        "",
-        "",
-        "yes",
-        "75%",
-        ""
-      ],
-      [
-        "Age_started_language",
-        "At what age did you start using this language most? (write \"0\" if from birth)",
-        "number",
-        "",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Tone_languages",
-        "Can you understand or speak any tone languages (e.g. Mandarin, Thai)? If 'yes' please specify",
-        "checkbox",
-        "No|Yes",
-        "No",
-        "",
-        "",
-        "",
-        "yes",
-        "75%",
-        ""
-      ],
-      [
-        "Handedness",
-        "What is your preferred hand?",
-        "radio",
-        "Left|Right|Both",
-        "No",
-        "",
-        "yes",
-        "100px",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Clinical_diagnosis",
-        "Do you have a clinical diagnosis of any of the following conditions? (Please select any that apply)",
-        "checkbox",
-        "Autism spectrum disorder (ASD)|Dyslexia|Attention-deficit disorder (ADD)/ Attention deficit hyperactivity disorder (ADHD)|Depression|Anxiety|Another mental health condition|A chronic physical health condition|None of the above",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Hearing_disorders",
-        "As far as you know, do you have/have you had any hearing disorders (e.g. hearing loss)?",
-        "dropdown",
-        "Yes|No",
-        "No",
-        "",
-        "yes",
-        "200px",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Absolute_pitch",
-        "Do you have absolute pitch (or perfect pitch; the ability to identify a musical note without a reference tone)?",
-        "radio",
-        "Yes|No",
-        "No",
-        "",
-        "yes",
-        "200px",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "Music_training",
-        "How many years of formal music training (on a musical instrument including voice) have you had? Please list your years of experience, e.g., piano, 10 years; voice, 2 years",
-        "text",
-        "",
-        "No",
-        "",
-        "",
-        "",
-        "",
-        "75%",
-        ""
-      ],
-      [
-        "",
-        "",
         "",
         ""
       ]

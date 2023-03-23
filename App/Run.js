@@ -1,6 +1,21 @@
+$.getScript( "libraries/collector/redcap_dropped_fields.js")
 project_json = {};
 var home_dir;
 
+var download_data_text = '<div id="card_container" style="width:100%;height:100%;display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;">'+
+'<div class="card" style="width: 30em;">'+
+  '<div class="card-header text-primary"><h2>You have finished</h2></div>'+
+  '<div class="card-body">'+
+    '<p><b>Thank you for taking part in this study.</b><br><br> If you wish, you can download the data by clicking the button below. '+
+    'It is advisable to do so in case any data transfer issues occured behind the scenes whilst you completed the study. '+
+    'If you have saved your experimental data, you can be added to the final dataset, ensuring your time has not been wasted.'+
+  '</div>'+
+  '<div class="card-footer"><button class="btn btn-primary text-white" id="download_json">Download data</button></div>'+
+'</div>'+
+'</div>'
+
+// This needs to be a global variable or Phase.add_response() cannot use it
+parent.parent.start_date_time = new Date().toLocaleDateString("en-US").replaceAll("/","_") +"_" +new Date().toLocaleTimeString().replaceAll(":","_");
 /*
  * Objects
  */
@@ -47,7 +62,7 @@ Project = {
     "detect_exe",
     "get_htmls",
     "get_gets",
-    "start_restart",
+    //"start_restart", {CGD} Turned this off a long time ago, can't really remember why! (Think it was something to do with a double page loading thing)
     "start_project",
     "load_phases",
     "select_condition",
@@ -100,10 +115,11 @@ Project = {
     }
   },
   finish_phase: function (go_to_info) {
-
-    // get date in useful format
-
-
+    const highestId = window.setTimeout(() => {
+      for (let i = highestId; i >= 0; i--) {
+      window.clearInterval(i);
+      }
+    }, 0);
     phase_end_ms = new Date().getTime();
     phase_inputs = {};
     $("#experiment_progress").css(
@@ -145,7 +161,7 @@ Project = {
         });
         return r;
       }, {});
-
+      
     var post_string = "post_" + project_json.post_no;
 
     response_data["location"] = Project.get_vars.location;
@@ -170,13 +186,12 @@ Project = {
     response_data[post_string + "_window_inner_width"] = window.innerWidth;
     response_data[post_string + "_window_inner_height"] = window.innerHeight;
 
-    response_data[post_string + "_US_date"] = new Date().toLocaleDateString("en-US");
+    response_data[post_string + "_us_date"] = new Date().toLocaleDateString("en-US");
     response_data[post_string + "_time"]     = new Date().toLocaleTimeString();;
     response_data[post_string + "_timezone"] = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     response_data[post_string + "_phase_end_ms"] = phase_end_ms;
-    response_data[post_string + "_rt_ms"] =
-      phase_end_ms - response_data[post_string + "_phase_start_ms"];
+    response_data[post_string + "_rt_ms"] = phase_end_ms - response_data[post_string + "_phase_start_ms"];
     response_data[post_string + "_phase_end_date"] = new Date(
       parseInt(phase_end_ms, 10)
     ).toString("MM/dd/yy HH:mm:ss");
@@ -210,21 +225,47 @@ Project = {
         not_final_phase = false;
         final_phase();
       } else {
-        project_json.this_phase = {};
-        project_json.phase_no = parseFloat(project_json.phase_no) + 1;
-        project_json.post_no = 0;
-        setTimeout(function () {
-          var this_index =
-            parseFloat(project_json.phase_no) +
-            parseFloat(project_json.this_condition.buffer) -
-            1;
-          write_phase_iframe(this_index);
-        });
-        Project.start_post(go_to_info);
+        if (typeof go_to_info !== "undefined") {
+          project_json.this_phase = {};
+          project_json.phase_no = parseFloat(go_to_info) - 1;
+          // project_json.phase_no = parseFloat(go_to_info);
+          project_json.post_no = 0;
+          setTimeout(function () {
+            var combined_phase_buffer = 
+              parseFloat(project_json.this_condition.buffer) + 
+              parseFloat(project_json.phase_no);
+              console.log("Buffering from phase: "+project_json.phase_no + " to phase: " + combined_phase_buffer)
+            for (var index = project_json.phase_no; index < combined_phase_buffer; index++) {
+              write_phase_iframe(index);
+            }
+            console.log("Trying to start: "+go_to_info)
+          },0);
+        } else {
+          project_json.this_phase = {};
+          project_json.phase_no = parseFloat(project_json.phase_no) + 1;
+          project_json.post_no = 0;
+          setTimeout(function () {
+            var this_index =
+              parseFloat(project_json.phase_no) +
+              parseFloat(project_json.this_condition.buffer) - 
+              1;
+            write_phase_iframe(this_index);
+          },0);
+        }
+        setTimeout(() => {
+          Project.start_post(go_to_info);
+        }, 1);
       }
     } else {
       project_json.post_no++;
       var start_time = new Date().getTime();
+      
+      $("#phase" + project_json.phase_no)
+        .contents()
+        .children()
+        .find("iframe")
+        .hide();
+      Project.start_post(go_to_info);
       project_json.this_phase[
         "post_" + project_json.post_no + "_phase_start_ms"
       ] = new Date().getTime();
@@ -232,22 +273,29 @@ Project = {
         "post_" + project_json.post_no + "_phase_start_date"
       ] = new Date(parseInt(start_time, 10)).toString("MM/dd/yy HH:mm:ss");
 
-      $("#phase" + project_json.phase_no)
-        .contents()
-        .children()
-        .find("iframe")
-        .hide();
-      Project.start_post(go_to_info);
     }
 
     /*
     * save to redcap (if appropriate)
     */
-    console.log("project_json.this_condition.redcap_url");
-    console.log(project_json.this_condition.redcap_url);
     if(typeof(project_json.this_condition.redcap_url) !== "undefined"){
-      console.log("hi, we;re here");
 
+      var keys = Object.keys(response_data)
+        // if (keys.includes("_pii_")) {
+          if (keys.some(e => e.includes("_pii_"))) {
+            for (let i = 0; i < keys.length; i++) {
+              let field = keys[i]
+              if (field.includes("_pii_")) {
+                form_name = field.split("_pii", 1)[0]
+                parent.parent.redcap_instrument = form_name;
+              } else {
+                //do nothing
+              }
+            }
+        } else {
+          parent.parent.redcap_instrument = "main";
+        }
+        console.log("REDcap Instrument: " + parent.parent.redcap_instrument)
       var phase_responses = project_json.responses[project_json.responses.length-1];
 
       console.log("phase_responses");
@@ -260,30 +308,65 @@ Project = {
       var clean_phase_responses = {};
 
       Object.keys(phase_responses).forEach(function(old_key){
-
-        //if(phase_responses[old_key].toLowerCase() !== "condition_redcap_url" & phase_responses[old_key] !== ""){
-
-
-          clean_phase_responses[this_location + "_" + old_key] =
-          phase_responses[old_key]
-        //}
+        clean_phase_responses[old_key] = phase_responses[old_key];
       });
-      delete(clean_phase_responses[
-        this_location + "_condition_redcap_url"
-      ]);
-      delete(clean_phase_responses[
-        this_location + "_"
-      ]);
+      
+      parent.parent.main_remove_fields.forEach(adjust_redcap_array)
+        function adjust_redcap_array(field) {
+          delete(clean_phase_responses[field]);
+        };
 
-      console.log("clean_phase_responses");
-      console.log(clean_phase_responses);
-      clean_phase_responses.record_id = phase_responses.username;
-
+      clean_phase_responses.record_id = phase_responses.username + "_" + parent.parent.start_date_time;
 
       clean_phase_responses['redcap_repeat_instance'] = project_json.phase_no;
-      clean_phase_responses['redcap_repeat_instrument'] = this_location;
+      clean_phase_responses['redcap_repeat_instrument'] = parent.parent.redcap_instrument;
+      if (parent.parent.redcap_instrument != "main") {
+        var field_name = parent.parent.redcap_instrument;
+        clean_phase_responses[field_name +'_complete'] = 2;
+        parent.parent.pii_remove_fields.forEach(adjust_redcap_array)
+        function adjust_redcap_array(field) {
+          delete(clean_phase_responses[field]);
+        };
+      }
+      // this_location.toLowerCase();
 
+      console.log("just before the ajax");
 
+      function redcap_post(
+        this_url,
+        this_data,
+        attempt_no
+      ){
+        console.log("attempt number " + attempt_no);
+        $.ajax({
+          type: "POST",
+          url: this_url,
+          crossDomain: true,
+          data: this_data,
+          success: function(result){
+            console.log("result");
+            if(result.toLowerCase().indexOf("error") !== -1 | result.toLowerCase().indexOf("count") === -1){
+              attempt_no++;
+              if(attempt_no > 2){
+                // alert("This data has not submitted, despite 3 attempts to do so. Please pause your participation and contact the researcher");
+                console.log("This data may not have been submitted, despite 3 attempts to do so. Please pause your participation and contact the researcher");
+              } else {
+                redcap_post(
+                  this_url,
+                  this_data,
+                  attempt_no
+                );
+              }
+            }
+          }
+        });
+      };
+
+      redcap_post(
+        project_json.this_condition.redcap_url,
+        clean_phase_responses,
+        0
+      );
       /*
       Object.keys(phase_responses).forEach(function(old_key){
 
@@ -305,34 +388,18 @@ Project = {
         type: "POST",
         url: project_json.this_condition.redcap_url,
         crossDomain: true,
-        data: clean_phase_responses
-
-        /*
-        {
-          "record_id": parent.parent.$("#prehashed_code").val(),
-          "participant_code": $("#participant_code").val(),
-          "trial_no" : parent.parent.project_json.trial_no,
-          //"participant_confirm": parent.parent.$("#prehashed_code").val(),
-          "shape_response_time": this_rt,
-          "color_response": $("#color_response").val(),
-          "shape_response_complete": 2
-        }
-        */,
+        data: clean_phase_responses,
         success: function(result){
           console.log("result");
-          console.log(result);
+          // console.log(result);
           //Phase.submit();
         }
       });
-
-
-
-
     }
 
     switch (Project.get_vars.platform) {
       case "localhost":
-        var data_response = Collector.electron.fs.write_data(
+        var data_response = CElectron.fs.write_data(
           Project.get_vars.location,
           $("#participant_code").val() +
             "_" +
@@ -393,6 +460,7 @@ Project = {
       project_json.phasetypes[this_proc[post_no + "phasetype"]];
     this_phase = project_json.phasetypes[this_proc[post_no + "phasetype"]];
 
+
     //look through all variables and replace with the value
 
     /*
@@ -407,28 +475,18 @@ Project = {
         "window.addEventListener('blur', function(){ var focus_val = $('#window_switch').val();  $('#window_switch').val(focus_val + 'leave-' + (new Date()).getTime() + ';')}); window.addEventListener('focus', function(){ var focus_val = $('#window_switch').val(); $('#window_switch').val(focus_val + 'focus-' + (new Date()).getTime() + ';')}); "
       )[0].outerHTML;
 
-    /*
-project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new Date()).getTime();
-*/
 
     //baseline_time
 
     this_phase =
-      "<scr" +
-      "ipt> Phase = {}; Phase.phase_no = '" +
-      phase_no +
-      "'; Phase.post_no ='" +
-      post_no +
-      "' </scr" +
-      "ipt>" +
-      "<scr" +
-      "ipt src = 'PhaseFunctions.js' ></scr" +
-      "ipt>" +
-      this_phase; //; phase_script +
+      `<script> Phase = {}; Phase.phase_no = '${phase_no}'; Phase.post_no ='${post_no}' </script><script src = 'PhaseFunctions.js' ></script>${this_phase}`; //; phase_script +
 
     this_phase = this_phase.replace("[phase_no]", phase_no);
     this_phase = this_phase.replace("[post_no]", post_no);
 
+    if(this_proc.item.toString() === "") {
+      bootbox.alert("ERROR: If it's 'White Screening' it's because you've got an incorrect or empty row in the 'Item' column of your procedure sheet!<br><br><em>(ps. I spent hours trying to debug Collector when this happened to me as I hadn't realised it was just a missing 0 which is why I'm writing this long error message, so if it happens again I can fix it in seconds! CD)</em>")
+    }
     if (this_proc.item.toString() !== "0") {
       this_stim = project_json.parsed_stim[this_proc.item];
       variable_list = Object.keys(this_proc).concat(Object.keys(this_stim));
@@ -473,7 +531,7 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
      */
 
     if (
-      typeof Collector.electron !== "undefined" &&
+      typeof CElectron !== "undefined" &&
       window.navigator.platform.toLowerCase().indexOf("mac") !== -1
     ) {
       this_phase = this_phase.replaceAll("../User/", home_dir + "/User/");
@@ -483,32 +541,22 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
     return this_phase;
   },
 
-  go_to: function (new_phase_no, proc_no) {
-    if (typeof proc_no === "undefined") {
-      proc_no = 0;
-    }
-    Project.finish_phase([new_phase_no - 1, proc_no]);
+  go_to: function (go_to_info) {
+    console.log("Jumping to phase: " + go_to_info)
+    parent.parent.project_json.inputs = jQuery("[name]");
+    Project.finish_phase(go_to_info);
   },
 
   start_post: function (go_to_info) {
-    console.log("go_to_info");
-    console.log(go_to_info);
     if (typeof go_to_info !== "undefined") {
-      project_json.phase_no = go_to_info[0];
-      project_json.post_no = go_to_info[1];
-      $(".phase_iframe").remove();
-      var this_buffer = project_json.this_condition.buffer;
-      var phase_no = project_json.phase_no;
-      for (var index = phase_no; index < phase_no + this_buffer; index++) {
-        write_phase_iframe(index);
-      }
+      project_json.phase_no = project_json.phase_no;
+      console.log("phase.go_to: "+project_json.phase_no)
     }
+    console.log("phase.submit: "+project_json.phase_no)
+    // console.log("go_to_info: "+ go_to_info);
     if (typeof project_json.responses[project_json.phase_no] === "undefined") {
       project_json.responses[project_json.phase_no] = {};
     }
-    project_json.this_phase[
-      "post_" + project_json.post_no + "_phase_start_ms"
-    ] = new Date().getTime();
     if (
       $("#phase" + project_json.phase_no)
         .contents()
@@ -535,6 +583,7 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
         .find(".post_iframe")
         .contents()
         .find("body")
+        .prepend('<button style="opacity:0; filter: alpha(opacity=0)" id="keyresponse_autofocus"></button>') // {CGD} Do not move, needs to prepend displayed HTML or autofocus scrolls to bottom on load
         .css("transform-origin", "top");
 
       try {
@@ -546,10 +595,10 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
             "scale(" + parent.parent.current_zoom + ")";
 
           if (isFirefox) {
-            this_iframe_style.width =
-              window.innerWidth / parent.parent.current_zoom;
-            this_iframe_style.height =
-              window.innerHeight / parent.parent.current_zoom;
+            this_iframe_style.width = (window.innerWidth * 0.98) / parent.parent.current_zoom;  // {CGD} adjusted all width/height to just under fullscreen to counter scroll bar issue
+            this_iframe_style.height = (window.innerHeight * 0.98)  / parent.parent.current_zoom;
+            this_iframe_style.maxWidth = (window.innerWidth * 0.97) / parent.parent.current_zoom;
+            this_iframe_style.maxHeight = (window.innerHeight * 0.97)  / parent.parent.current_zoom;
             this_iframe_style.transformOrigin = "left top";
           } else {
             this_iframe_style.width = "100%";
@@ -564,12 +613,13 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
       $("#phase" + project_json.phase_no).css("width", "100%");
       $("#phase" + project_json.phase_no).css("height", "100%");
       $("#phase" + project_json.phase_no).css("visibility", "visible");
-      $("#phase" + project_json.phase_no)
+      $("#phase" + project_json.phase_no) 
         .contents()
         .find("#post" + project_json.post_no)
         .contents()
-        .find("#zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-        .focus(); //or anything that no-one would accidentally create.
+        .find("#keyresponse_autofocus") //.append("<input type='hidden' name='complete' value='0' />") // {CGD} used to set REDCap completion value so records are green on data input
+        .focus() //or anything that no-one would accidentally create.
+        .css('outline', 'none');
 
       //detect if max_time exists and start timer
       var post_val;
@@ -579,26 +629,18 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
         post_val = "post " + project_json.post_no + " ";
       }
       var max_time;
-      if (
-        typeof project_json.parsed_proc[project_json.phase_no][
-          post_val + "max_time"
-        ] === "undefined"
-      ) {
+      if (typeof project_json.parsed_proc[project_json.phase_no][post_val + "max_time"] === "undefined") {
         max_time = "user";
       } else {
-        max_time =
-          project_json.parsed_proc[project_json.phase_no][
-            post_val + "max_time"
-          ];
+        max_time = project_json.parsed_proc[project_json.phase_no][post_val + "max_time"];
       }
       if ((max_time !== "") & (max_time.toLowerCase() !== "user")) {
         var this_phase_no = project_json.phase_no;
         var this_post_no = project_json.post_no;
         Project.phase_timer = new Collector.timer(function () {
-          if (
-            this_phase_no === project_json.phase_no &&
-            this_post_no === project_json.post_no
-          ) {
+          if (this_phase_no === project_json.phase_no && this_post_no === project_json.post_no) {
+            // Project.finish_phase();
+            project_json.inputs = jQuery("[name]");
             Project.finish_phase();
           }
         }, parseFloat(max_time) * 1000);
@@ -620,6 +662,9 @@ project_json.this_phase["post_"+project_json.post_no+"_phase_start_ms"] = (new D
         //no timers on this phase?
       }
     }
+    project_json.this_phase[
+      "post_" + project_json.post_no + "_phase_start_ms"
+    ] = new Date().getTime();
   },
 };
 
@@ -666,18 +711,6 @@ function clean_phasetypes() {
     return row;
   });
 
-  /*
-  project_json.parsed_proc.forEach(function (row, row_index) {
-    //identify code columns
-    var tt_cols = Object.keys(row).filter(
-      (this_key) => this_key.indexOf("phasetype") !== -1
-    );
-    tt_cols.forEach(function (tt_col) {
-      project_json.parsed_proc[row_index][tt_col] =
-        project_json.parsed_proc[row_index][tt_col].toLowerCase();
-    });
-  });
-  */
   Project.activate_pipe();
 }
 
@@ -719,12 +752,12 @@ function detect_exe() {
     Project.activate_pipe();
   });
 }
-
 function final_phase() {
   switch (Project.get_vars.platform) {
     case "github":
     case "simulateonline":
     case "server":
+      /*
       online_data_obj.save_queue_add(function () {
         online_save(
           Project.get_vars.location,
@@ -797,7 +830,8 @@ function final_phase() {
           project_json.responses.length
         );
       });
-      var download_at_end = project_json.this_condition.download_at_end;
+      */
+      download_at_end = project_json.this_condition.download_at_end;
       if (download_at_end === undefined) {
         download_at_end = "on";
       }
@@ -816,18 +850,29 @@ function final_phase() {
       $("#project_div").append("<div id='download_div'></div>");
 
       if (download_at_end === "on") {
-        $("#download_div").html(
-          "<h1 class='text-danger'>" +
-            "Please wait while we confirm that all your data has been saved" +
-            "</h1>" +
-            '<div class="progress">' +
-            '<div id="google_progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">' +
-            "</div>" +
-            "</div>" +
-            "<h3 class='text-primary'>Please do not close this window until it has been confirmed that the researcher has been e-mailed your data (or you have downloaded the data yourself that you will e-mail the researcher). If you do not get a prompt to do this within 30 seconds, press CTRL-S and you should be able to directly download your data.</h3>"
+        $("#download_div").html(download_data_text
+          // "<h3 class='text-primary'><h1>Thank you for participating. If you'd like to download your raw data <span id='download_json'>click here</span></h1></h3>"
         );
+        $("#download_json").on("click", function () {
+          precrypted_data(project_json, "What do you want to save this file as?");
+        });
       } else if (download_at_end === "off") {
-        // do nothing
+        $("#download_div").html(""
+          /*
+          "<h1 class='text-danger'>" +
+            "<h3 class='text-primary'>If you would like to save your data (e.g. for your interest or as a back-up) press CTRL-S and you should be able to directly download your data.</h3>"
+          */
+        );
+      }
+      if(typeof(project_json.this_condition.sona_url) !== "undefined"){
+        if(typeof(Project.get_vars.sona_id) === "undefined"){
+          bootbox.alert("There seems to be a problem with how the researcher has set up the connection FROM SONA to Collector. Please tell them to include '&sona_id=%SURVEY_CODE%' towards the end of the URL.");
+        } else {
+          $("#download_div").append(
+            $("<div>")
+              .html("You can now return to SONA by clicking <a href='" + project_json.this_condition.sona_url + "&sona_id=" + Project.get_vars.sona_id + "' id='sona_link' target='_blank'>here</a>")
+          );
+        }
       }
       function online_save_check() {
         setTimeout(function () {
@@ -846,24 +891,14 @@ function final_phase() {
                     " please copy the link into a new window to proceed there."
                 );
               }
-              var download_at_end_html;
-              if (project_json.this_condition.download_at_end !== "off") {
-                download_at_end_html =
-                  " If you'd like to download your raw data <span id='download_json'>click here</span></h1>";
-              } else {
-                download_at_end_html = "";
-              }
-              $("#project_div").html(
-                "<h1>Thank you for participating." + download_at_end_html
+              $("#project_div").html(download_data_text
+                // "<h1>Thank you for participating. If you'd like to download your raw data <span id='download_json'>click here</span></h1>"
               );
               $("#download_json").on("click", function () {
-                precrypted_data(
-                  project_json,
-                  "What do you want to save this file as?"
-                );
+                precrypted_data(project_json, "What do you want to save this file as?");
               });
-              $("#participant_country").show();
-              $("#participant_country").load("ParticipantCountry.html");
+              //$("#participant_country").show();
+              //$("#participant_country").load("ParticipantCountry.html");
               window.localStorage.removeItem("project_json");
               window.localStorage.removeItem("username");
               window.localStorage.removeItem("completion_code");
@@ -879,21 +914,19 @@ function final_phase() {
           }
         }, 1000);
       }
-      online_save_check();
+      $("#download_json").on("click", function () {
+        precrypted_data(
+          project_json,
+          "What do you want to save this file as?"
+        );
+      });
+      //online_save_check();
       break;
     case "localhost":
     case "preview":
     case "onlinepreview":
       online_data_obj.finished_and_stored = true;
-      if (project_json.this_condition.download_at_end !== "off") {
-        download_message =
-          "You can download the data by clicking <b><span id='download_json'>here</span></b>.";
-      } else {
-        download_message = "";
-      }
-      $("#project_div").html(
-        "<h1>You have finished. " + download_message + "</h1>"
-      );
+      $("#project_div").html(download_data_text);
       $("#download_json").on("click", function () {
         precrypted_data(project_json, "What do you want to save this file as?");
       });
@@ -904,7 +937,6 @@ function final_phase() {
       break;
   }
 }
-
 function full_screen() {
   if (typeof project_json.this_condition.fullscreen !== "undefined") {
     if (project_json.this_condition.fullscreen === "on") {
@@ -985,21 +1017,31 @@ function get_htmls() {
 }
 
 function insert_end_checks() {
-  var this_proc = project_json.parsed_proc;
-  var this_proc_end = {
-    item: 0,
-    max_time: "",
-    text: "",
-    code: "end_checks_experiment",
-  };
-  var shuffle_levels = Object.keys(project_json.parsed_proc[0]).filter(
-    (item) => item.indexOf("shuffle") !== -1
-  );
-  shuffle_levels.forEach(function (shuffle_level) {
-    this_proc_end[shuffle_level] = "off";
-  });
+  if (
+    Project.get_vars.platform === "preview" ||
+    (typeof project_json.this_condition.skip_quality !== "undefined" &&
+      project_json.this_condition.skip_quality.toLowerCase() === "yes")
+  ) {
 
-  this_proc = this_proc.push(this_proc_end);
+  } else {
+
+    var this_proc = project_json.parsed_proc;
+    var this_proc_end = {
+      item: 0,
+      max_time: "",
+      text: "",
+      phasetype: "end_checks_experiment",
+    };
+    var shuffle_levels = Object.keys(project_json.parsed_proc[0]).filter(
+      (item) => item.indexOf("shuffle") !== -1
+    );
+    shuffle_levels.forEach(function (shuffle_level) {
+      this_proc_end[shuffle_level] = "off";
+    });
+
+    this_proc.push(this_proc_end);
+
+  }
   Project.activate_pipe();
 }
 
@@ -1111,7 +1153,7 @@ function load_phases() {
     case "simulateonline":
     case "localhost":
     case "preview":
-      home_dir = Collector.electron.git.locate_repo({
+      home_dir = CElectron.git.locate_repo({
         org: org_repo[0],
         repo: org_repo[1],
       });
@@ -1174,11 +1216,11 @@ function parse_sheets() {
     case "simulateonline":
     case "preview":
       var folder = "Projects/" + Project.get_vars.location;
-      var proc_sheet_content = Collector.electron.fs.read_file(
+      var proc_sheet_content = CElectron.fs.read_file(
         folder,
         proc_sheet_name
       );
-      var stim_sheet_content = Collector.electron.fs.read_file(
+      var stim_sheet_content = CElectron.fs.read_file(
         folder,
         stim_sheet_name
       );
@@ -1369,7 +1411,7 @@ function post_welcome_data(returned_data) {
       $("#welcome_div").hide();
       $("#post_welcome").show();
       $("#project_div").show();
-      //full_screen();
+      //full_screen(); {CGD} Commented out to stop multiple "do you want to do full screen?" messages
     } else if (id_error === "random") {
       var this_code = Math.random().toString(36).substr(2, 16);
       post_welcome(this_code, "random");
@@ -1400,9 +1442,11 @@ function precrypted_data(decrypted_data, message) {
   condition_headers = Object.keys(this_condition).filter(function (item) {
     return item !== "_empty_";
   });
-
   table_headers = response_headers.concat(condition_headers);
   downloadable_csv = [table_headers];
+  if(parent.parent.go_to_active){
+    var responses_csv = responses_csv.filter(value => Object.keys(value).length !== 0);
+  }
   responses_csv.forEach(function (row, row_no) {
     downloadable_csv.push([]);
     table_headers.forEach(function (item, item_no) {
@@ -1415,16 +1459,19 @@ function precrypted_data(decrypted_data, message) {
       }
     });
   });
-
-  bootbox.prompt({
-    title: message,
-    value: $("#participant_code").val() + ".csv",
-    callback: function (result) {
-      if (result !== null) {
-        save_csv(result, Papa.unparse(downloadable_csv));
-      }
-    },
-  });
+  if (!parent.parent.functionIsRunning) {
+    parent.parent.functionIsRunning = true;
+    bootbox.prompt({
+      title: message,
+      value: $("#participant_code").val() + "_" + parent.parent.start_date_time + ".csv",
+      callback: function (result) {
+        parent.parent.functionIsRunning = false;
+        if (result !== null) {
+          save_csv(result, Papa.unparse(downloadable_csv));
+        }
+      },
+    });
+  }
 }
 
 function process_welcome() {
@@ -1462,14 +1509,17 @@ function process_welcome() {
       $("#researcher_message").html(project_json.this_condition.start_message);
     } else {
       def_start_msg =
-        "<h1 class='text-primary'> Collector</h1>" +
-        "<br><br>" +
-        "<h4>It's very important to read the following before starting!</h1>" +
-        "<div class='text-danger'>If you complete multiple Collector experiments at the same time, your completion codes may be messed up. Please do not do this!</div>" +
-        "<br>" +
-        "<div class='text-danger'>If you participate in this experiment, your progress in it will be stored on your local machine to avoid you losing your progress if the window or tab closes or freezes. This data will be cleared from your computer once you have completed the task. <b>However, if you do not want this website to store your progress on your computer, DO NOT PROCEED.</b></div>" +
-        "<br>" +
-        "<div class='text-danger'>If the experiment freezes, try pressing <b>CTRL-S</b> to save your data so far. </div>";
+        '<div class="card"><div class="card-header text-primary">'+
+          '<h2>Collector</h2>'+
+        '</div>'+
+        '<div class="card-body">'+
+          "<h5>It's very important to read the following before starting!</h5><br>" +
+          '<p class="text-danger">If you complete multiple Collector experiments at the same time, your completion codes may be messed up. Please do not do this!' +
+          'If you participate in this experiment, your progress in it will be stored on your local machine to avoid you losing your progress if the window or tab closes or freezes.'+
+          'This data will be cleared from your computer once you have completed the task.<b><br><br>However, if you do not want this website to store your progress on your computer, DO NOT PROCEED.</b><br><br>' +
+          'If the experiment freezes, try pressing <b>CTRL-S</b> to save your data so far.</p></div>'+
+        '</div></div>';
+
       $("#researcher_message").html(def_start_msg);
     }
   }
@@ -1685,7 +1735,7 @@ function shuffle_start_exp() {
 function start_restart() {
   if (isSafari) {
     bootbox.alert(
-      "This experiment will not run in safari. Please close and use another browser"
+      "Please do not use Safari to complete this study. It is likely that your data will not save correctly if you do. Please close Safari and use another browser"
     );
   } else  /* //skipping resume for now if (
     (window.localStorage.getItem("project_json") !== null) &
@@ -1761,10 +1811,10 @@ function start_project() {
       case "localhost":
       case "preview":
         electron_wait = setInterval(function () {
-          if (typeof Collector.electron.fs.read_file !== "undefined") {
+          if (typeof CElectron.fs.read_file !== "undefined") {
             clearInterval(electron_wait);
             project_json = JSON.parse(
-              Collector.electron.fs.read_file(
+              CElectron.fs.read_file(
                 "Projects",
                 Project.get_vars.location + ".json"
               )
@@ -1774,7 +1824,7 @@ function start_project() {
              * load conditions sheet
              */
             project_json.conditions = Collector.PapaParsed(
-              Collector.electron.fs.read_file(
+              CElectron.fs.read_file(
                 "Projects/" + Project.get_vars.location,
                 "conditions.csv"
               )
@@ -1869,6 +1919,7 @@ function write_phase_iframe(index) {
     return /phasetype/.test(key);
   });
 
+
   phase_events = post_code.filter(function (post_phase) {
     return this_proc[post_phase] !== "";
   });
@@ -1898,9 +1949,8 @@ function write_phase_iframe(index) {
 
   for (let i = 0; i < phase_events.length; i++) {
     var phase_content = Project.generate_phase(index, i);
-    phase_content +=
-      "<button style='opacity:0; filter: alpha(opacity=0)' id='zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'></button>";
-
+      // phase_content +=
+      '<button style="opacity:0; filter: alpha(opacity=0)" id="zzz"></button>' + phase_content;
     doc = document
       .getElementById("phase" + index)
       .contentWindow.document.getElementById("post" + i).contentWindow;
@@ -2057,36 +2107,31 @@ $(window).bind("keydown", function (event) {
 });
 
 //prevent closing without warning
-window.onbeforeunload = function () {
-  var leave_early = project_json.this_condition.leave_early;
-  if (
-    typeof(leave_early) !== "undefined" && leave_early === "no"
-  ){
-    switch (Project.get_vars.platform) {
-      case "simulateonline":
-      case "localhost":
-        break;
-      default:
-        if (online_data_obj.finished_and_stored === false) {
-          bootbox.confirm(
-            "Would you like to leave the experiment early? If you didn't just download your data there's a risk of you losing your progress.",
-            function (result) {
-              if (result) {
-                online_data_obj.finished_and_stored = true; //even though it's not
-              }
-            }
-          );
-          precrypted_data(
-            project_json,
-            "It looks like you're trying to leave the experiment before you're finished (or at least before the data has been e-mailed to the researcher. Please choose a filename to save your data as and e-mail it to the researcher. It should appear in your downloads folder."
-          );
+// window.onbeforeunload = function () {
+//   switch (Project.get_vars.platform) {
+//     case "simulateonline":
+//     case "localhost":
+//       break;
+//     default:
+//       if (online_data_obj.finished_and_stored === false) {
+//         bootbox.confirm(
+//           "Would you like to leave the experiment early? If you didn't just download your data there's a risk of you losing your progress.",
+//           function (result) {
+//             if (result) {
+//               online_data_obj.finished_and_stored = true; //even though it's not
+//             }
+//           }
+//         );
+//         precrypted_data(
+//           project_json,
+//           "It looks like you're trying to leave the experiment before you're finished (or at least before the data has been e-mailed to the researcher. Please choose a filename to save your data as and e-mail it to the researcher. It should appear in your downloads folder."
+//         );
 
-          return "Please do not try to refresh - you will have to restart if you do so.";
-        }
-        break;
-    }
-  }
-};
+//         return "Please do not try to refresh - you will have to restart if you do so.";
+//       }
+//       break;
+//   }
+// };
 $("body").css("text-align", "center");
 $("body").css("margin", "auto");
 

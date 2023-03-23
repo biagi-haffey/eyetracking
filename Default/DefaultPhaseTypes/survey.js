@@ -2,6 +2,11 @@
  * Collector Survey 3.1.0
  */
 
+/* 
+ * Setup a prepend variable
+ */
+  var survey_prepend = "survey_";
+
 /*
  * detect if testing or not
  */
@@ -26,7 +31,7 @@ if(typeof(parent.parent.Project) !== "undefined"){
     case "localhost":
     case "preview":
       org_repo = parent.parent.project_json.location.split("/");
-      home_dir = parent.parent.Collector.electron.git.locate_repo({
+      home_dir = parent.parent.CElectron.git.locate_repo({
         org: org_repo[0],
         repo: org_repo[1],
       });
@@ -62,6 +67,7 @@ types_list = [
   "radio",
   "radio_vertical",
   "radio_horizontal",
+  "redcap_pii",
   "report_score",
   "text",
 ];
@@ -144,9 +150,17 @@ if (
     );
 } else {
   appropriate_message(
-    "If you are the researcher, please check the 'settings for this survey. The input for 'tab_hor_vert' appears to be invalid. Please change it to 'horizontal' or 'vertical' or 'none' or remove 'tab_hot_vert' altogether from the settings, which will make the tabs invisible"
+    "If you are the researcher, please check the 'settings' for this survey. The input for 'tab_hor_vert' appears to be invalid. Please change it to 'horizontal' or 'vertical' or 'none' or remove 'tab_hot_vert' altogether from the settings, which will make the tabs invisible"
   );
 }
+
+$("#everything").append(
+  $("<input>")
+    .prop("id", "false_submit")
+    .prop("name", "false_submit")
+    .attr("type", "hidden")
+    .val(0)
+)
 
 /*
  * Defining objects
@@ -286,9 +300,17 @@ $("#proceed_button").on("click", function () {
     appropriate_message(
       "You're missing some responses. Please fill in all the answers for the questions in red above."
     );
+
+    /*
+     * count how many times the participant has tried to proceed
+     */
+    var submit_fails = $("#false_submit").val();
+        submit_fails++;
+        $("#false_submit").val(submit_fails);
+
   } else if (current_tab > survey_obj.tabs) {
     appropriate_message(
-      "Error - please contact Scientific Open Solutions about this problem, error 'Survey_001'."
+      "Error - please contact the researcher about this problem, error 'Survey_001'."
     );
   }
 });
@@ -307,6 +329,23 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 /*
  * Functions
  */
+
+   // Basic function for validating email fields {CGD}
+   function validateEmail() {
+    var email_input = $('input[type=email]').val();
+      if (row["optional"].toLowerCase() === "no") {
+        if(email_input == '' || email_input.indexOf('@') == -1 || email_input.indexOf('.') == -1) {
+          appropriate_message("Sorry your email address is not valid<br>The proceed button will not work until your correct this");
+          $("#proceed_button").css('pointer-events','none');
+          $("#proceed_button").css('opacity','0.25');
+        } else {
+          $("#proceed_button").css('pointer-events','auto');
+          $("#proceed_button").css('opacity','1');
+        }
+      } else {
+        console.log("don't validate email field");
+      }
+  }
 
 function clean_item(this_item) {
   if ((this_item.indexOf("'") !== -1) | (this_item.indexOf('"') !== -1)) {
@@ -478,6 +517,10 @@ function process_question(row, row_no) {
 
     [feedback_array, feedback_color] = get_feedback(row);
 
+    if (row["type"].toLowerCase() === "redcap_pii") {
+      survey_prepend = row["item_name"].toLowerCase() + '_pii_';
+    } 
+
     var survey_id = "survey_" + row["item_name"].toLowerCase();
 
     question_td =
@@ -487,12 +530,12 @@ function process_question(row, row_no) {
         .addClass("row_" + row_no)
         .prop("id", survey_id + "_response")
         .prop("name", survey_id + "_response")
-        .val("")[0].outerHTML +
-      $("<input>")
-        .attr("type", "hidden")
-        .prop("id", survey_id + "_value")
-        .prop("name", survey_id + "_value")
-        .val("")[0].outerHTML;
+        .val("")[0].outerHTML; // +
+      // $("<input>")
+      //   .attr("type", "hidden")
+      //   .prop("id", survey_id + "_value")
+      //   .prop("name", survey_id + "_value")
+      //   .val("")[0].outerHTML;
 
     /*
      * Survey settings
@@ -634,7 +677,8 @@ function process_question(row, row_no) {
       case "radio_horizontal":
         question_td += write("radio_horizontal", row_x);
         break;
-
+            case "redcap_pii":
+        break;
       case "report_score":
         question_td.append(
           $("<input>")
@@ -728,6 +772,8 @@ function process_question(row, row_no) {
         .html(question_td)[0].outerHTML;
 
       //var row_html="<td colspan='2'>"+question_td+"</td>";
+    } else if (row["type"].toLowerCase() === "redcap_pii") {
+      row_html = write(row["item_name"].toLowerCase(), row);
     } else {
       if (
         (row["text"].toLowerCase() === "page_start") |
@@ -779,7 +825,7 @@ function process_score(
   if (typeof values_reverse !== "undefined" && values_reverse === "r") {
     item_values.reverse();
   }
-  item_answers = survey_obj.data[row_no]["values"].split("|");
+  item_answers = survey_obj.data[row_no]["answers"].split("|");
   var this_value = item_values[item_answers.indexOf(this_response)];
   $("#survey_" + item + "_score").val(this_value);
   if (typeof this_value !== "undefined") {
@@ -894,6 +940,7 @@ function response_check(submitted_element) {
       break;
 
     case "number":
+    case "email":
     case "radio":
     case "select-one":
     case "text":
@@ -906,10 +953,12 @@ function response_check(submitted_element) {
   update_score();
 }
 
+var item_name;
+
 function retrieve_row_no_item_name(this_element) {
   var these_classes = this_element.className.split(" ");
   var row_no;
-  var item_name;
+  // var item_name;
   these_classes.forEach(function (this_class) {
     if (this_class.indexOf("row_") > -1) {
       row_no = this_class.replace("row_", "");
@@ -1030,9 +1079,10 @@ function update_score() {
 
     questions.forEach(function (row_no) {
       var item = survey_obj.data[row_no].item_name.toLowerCase();
-      var this_response = $("#survey_" + item + "_value").val();
+      var this_response = $("#survey_" + item + "_response").val();
       var normal_reverse = this_scale.questions[row_no];
 
+      
       if (normal_reverse.indexOf("-") === -1) {
         var multiplier = parseFloat(normal_reverse.replace("r", ""));
         if (normal_reverse.indexOf("r") === 0) {
@@ -1155,11 +1205,8 @@ function write(type, row) {
         feedback_color,
         row
       );
-      var this_div = $("<div>")
-        .addClass("custom-control")
-        .addClass("custom-checkbox")
-        .addClass("form-inline")
-        .css("margin", "20px");
+      var this_div = $("<div>");
+      this_div.addClass("custom-control").addClass("custom-checkbox");
       var this_checkbox = $("<input>");
       this_checkbox[0].id = row["item_name"] + i;
       this_checkbox[0].value = options[i];
@@ -1171,8 +1218,7 @@ function write(type, row) {
         .addClass("custom-control")
         .addClass("custom-checkbox")
         .addClass("response")
-        .addClass(row["item_name"] + "_item_row")
-        .css("margin", "5px");
+        .addClass(row["item_name"] + "_item_row");
       var this_label = $("<label>");
       this_label[0].htmlFor = row["item_name"] + i;
       this_label[0].innerHTML = options[i];
@@ -1262,7 +1308,10 @@ function write(type, row) {
       .addClass("response")
       .addClass(row["item_name"] + "_item row_" + row["row_no"])
       .attr("type", "email")
-      .attr("name", "survey_" + row["item_name"]);
+      .attr("name", "survey_" + row["item_name"])
+      .attr("onblur", "validateEmail()")
+      .prop("id", "survey_" + row["item_name"] + "_response" + " emailInput");
+      this_html += this_input[0].outerHTML;
   } else if (type === "instruct") {
     this_html += "<td colspan='2'>" + row["text"] + "</td>";
   } else if (type === "jumbled") {
@@ -1381,6 +1430,7 @@ function write(type, row) {
       var this_input = $("<input>");
       this_input[0].type = "radio";
       this_input[0].id = row["item_name"] + i;
+      this_input[0].value = options[i];
       this_input[0].name = "survey_" + row["item_name"];
       this_input
         .addClass("custom-control-input")
@@ -1568,3 +1618,4 @@ if (typeof module !== "undefined") {
     load_survey(current_survey, "survey_outline");
   }
 }
+
