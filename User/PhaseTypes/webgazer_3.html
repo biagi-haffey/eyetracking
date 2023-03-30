@@ -542,7 +542,7 @@ function prepareBlock() {
  * CALIBRATE
  ************************************/
 function startCalibration() {
-  alert("calibration_skip = " + calibration_skip);
+  //alert("calibration_skip = " + calibration_skip);
   if(calibration_skip == "skip" ||
      calibration_skip == "on"  ||
      calibration_skip == "yes" ||
@@ -550,7 +550,7 @@ function startCalibration() {
     alert("Calibration skipping");
     endValidation()
   } else {
-    alert("Calibration starting");
+    //alert("Calibration starting");
     $('.stimuli').hide();
     $('#calibration_dot').hide();
     if (block_no == 0) {
@@ -1645,7 +1645,6 @@ function stimuliStart() {
         }
         break;
       case "text":
-        //alert("hi");
         this_item = $("<div>");
         this_item.html(element_json.text)
           .addClass("stimuli")

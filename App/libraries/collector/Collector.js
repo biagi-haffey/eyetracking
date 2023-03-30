@@ -213,7 +213,7 @@ Collector.complete_csv= function(this_csv){
 Collector.custom_alert= function(msg, duration) {
 
   if(typeof(duration) === "undefined"){
-    duration = 1500;
+    duration = 2000;
   }
 
   var top_padding = parseFloat(
@@ -246,8 +246,7 @@ Collector.custom_alert= function(msg, duration) {
       padding:          "20px",
       position:         "fixed",
       right:            "10px",
-      // top:              (top_padding + 20) + "px",
-      top:              "10%",
+      top:              (top_padding + 20) + "px",
       "z-index":        1000
     })
     .html(msg + " (click to keep on screen and click again to hide)");
@@ -287,13 +286,6 @@ Collector.custom_alert= function(msg, duration) {
       });
     }
   },duration);
-
-  // This just removes the "saved" message alert instantly by pressing escape
-  $(document).keyup(function(e) {
-    if (e.key === "Escape") {
-      $(this_alert).remove();
-    }
-  });
 }
 Collector.detect_context= function(){
   //turn to false to make use of eel and python
@@ -424,6 +416,7 @@ Collector.start = function(){
   } else {
     correct_master();
     correct_user();
+    list_allows();
     list_repos();
     list_projects();
     list_graphics();

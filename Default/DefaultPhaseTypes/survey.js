@@ -2,11 +2,6 @@
  * Collector Survey 3.1.0
  */
 
-/* 
- * Setup a prepend variable
- */
-  var survey_prepend = "survey_";
-
 /*
  * detect if testing or not
  */
@@ -67,7 +62,6 @@ types_list = [
   "radio",
   "radio_vertical",
   "radio_horizontal",
-  "redcap_pii",
   "report_score",
   "text",
 ];
@@ -517,10 +511,6 @@ function process_question(row, row_no) {
 
     [feedback_array, feedback_color] = get_feedback(row);
 
-    if (row["type"].toLowerCase() === "redcap_pii") {
-      survey_prepend = row["item_name"].toLowerCase() + '_pii_';
-    } 
-
     var survey_id = "survey_" + row["item_name"].toLowerCase();
 
     question_td =
@@ -530,12 +520,12 @@ function process_question(row, row_no) {
         .addClass("row_" + row_no)
         .prop("id", survey_id + "_response")
         .prop("name", survey_id + "_response")
-        .val("")[0].outerHTML; // +
-      // $("<input>")
-      //   .attr("type", "hidden")
-      //   .prop("id", survey_id + "_value")
-      //   .prop("name", survey_id + "_value")
-      //   .val("")[0].outerHTML;
+        .val("")[0].outerHTML +
+      $("<input>")
+        .attr("type", "hidden")
+        .prop("id", survey_id + "_value")
+        .prop("name", survey_id + "_value")
+        .val("")[0].outerHTML;
 
     /*
      * Survey settings
@@ -677,8 +667,7 @@ function process_question(row, row_no) {
       case "radio_horizontal":
         question_td += write("radio_horizontal", row_x);
         break;
-            case "redcap_pii":
-        break;
+
       case "report_score":
         question_td.append(
           $("<input>")
@@ -772,8 +761,6 @@ function process_question(row, row_no) {
         .html(question_td)[0].outerHTML;
 
       //var row_html="<td colspan='2'>"+question_td+"</td>";
-    } else if (row["type"].toLowerCase() === "redcap_pii") {
-      row_html = write(row["item_name"].toLowerCase(), row);
     } else {
       if (
         (row["text"].toLowerCase() === "page_start") |
@@ -825,7 +812,7 @@ function process_score(
   if (typeof values_reverse !== "undefined" && values_reverse === "r") {
     item_values.reverse();
   }
-  item_answers = survey_obj.data[row_no]["answers"].split("|");
+  item_answers = survey_obj.data[row_no]["values"].split("|");
   var this_value = item_values[item_answers.indexOf(this_response)];
   $("#survey_" + item + "_score").val(this_value);
   if (typeof this_value !== "undefined") {
@@ -953,12 +940,10 @@ function response_check(submitted_element) {
   update_score();
 }
 
-var item_name;
-
 function retrieve_row_no_item_name(this_element) {
   var these_classes = this_element.className.split(" ");
   var row_no;
-  // var item_name;
+  var item_name;
   these_classes.forEach(function (this_class) {
     if (this_class.indexOf("row_") > -1) {
       row_no = this_class.replace("row_", "");
@@ -1079,10 +1064,9 @@ function update_score() {
 
     questions.forEach(function (row_no) {
       var item = survey_obj.data[row_no].item_name.toLowerCase();
-      var this_response = $("#survey_" + item + "_response").val();
+      var this_response = $("#survey_" + item + "_value").val();
       var normal_reverse = this_scale.questions[row_no];
 
-      
       if (normal_reverse.indexOf("-") === -1) {
         var multiplier = parseFloat(normal_reverse.replace("r", ""));
         if (normal_reverse.indexOf("r") === 0) {
@@ -1430,7 +1414,6 @@ function write(type, row) {
       var this_input = $("<input>");
       this_input[0].type = "radio";
       this_input[0].id = row["item_name"] + i;
-      this_input[0].value = options[i];
       this_input[0].name = "survey_" + row["item_name"];
       this_input
         .addClass("custom-control-input")
